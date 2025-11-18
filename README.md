@@ -1,67 +1,118 @@
-# Classical Dijkstra's Algorithm (Java)
+# Classical Dijkstra’s Algorithm (Java Implementation)
 
-**Author:** Rikesh Budhathoki  
-**Course:** CSC 492  
-**Instructor:** Jun Huang  
+## Author  
+**Rikesh Budhathoki**  
+CSC 492 – Independent Research  
+Instructor: **Jun Huang**
 
-This project implements the **classical, array-based Dijkstra’s Algorithm** for solving the Single Source Shortest Path (SSSP) problem on directed graphs with **non-negative** edge weights.  
-The structure includes clear header comments and a modular design matching common academic requirements.
+---
 
-## 1. Overview
+## 📌 Overview
 
-Dijkstra's Algorithm computes the shortest path from a single source vertex to all other vertices in a weighted graph **with no negative edges**.
+This project implements the **classical Dijkstra’s shortest-path algorithm** using:
 
-This version uses:
+- A **directed weighted graph** represented via adjacency lists  
+- A **min-priority queue (binary heap)** to efficiently choose the next closest vertex  
+- Full Java implementation with clean ADT structure (`Graph`, `Dijkstra`, `Main`)
 
-- An adjacency list representation of the graph  
-- Linear scanning to find the next vertex with minimum distance  
-- Arrays to store:
-  - `dist[v]` shortest known distance from source
-  - `visited[v]` to mark finalized vertices
+The algorithm computes the **shortest distance from a single source node to all other nodes**, assuming **non-negative edge weights**.
 
-## 2. Time & Space Complexity
+This project is part of a research-based implementation comparing classical and improved versions of Dijkstra’s algorithm.
 
-| Version | Data Structure | Complexity |
-|--------|----------------|------------|
-| Classical Dijkstra | Array + linear scan | **O(V²)** |
-| Improved version (different repo) | Priority Queue | **O((V+E) log V)** |
+---
 
-Space complexity: **O(V + E)**
+## 📘 What Dijkstra’s Algorithm Does
 
-## 3. Project Structure
+Dijkstra’s algorithm solves the **Single Source Shortest Path (SSSP)** problem.
+
+Given:
+
+- A graph \( G = (V, E) \)  
+- Non-negative edge weights  
+- A source vertex \( s \)
+
+It computes:
+
+\[
+dist[v] = \text{minimum cost path from } s \text{ to } v
+\]
+
+---
+
+## 🧠 How the Classical Algorithm Works
+
+1. Initialize distances:  
+   - `dist[source] = 0`  
+   - All others = `∞`
+
+2. Use a **min-priority queue** to repeatedly extract the vertex with the smallest known distance.
+
+3. Relax all outgoing edges from that vertex:
+   \[
+   \text{if } dist[u] + w(u,v) < dist[v] \Rightarrow dist[v] = dist[u] + w(u,v)
+   \]
+
+4. Continue until all vertices are visited (finalized).
+
+---
+
+## ⏳ Time Complexity
+
+| Method | Complexity |
+|--------|-------------|
+| Using Binary Heap | **O((V + E) log V)** |
+| Using Array | **O(V²)** |
+
+This implementation uses a **binary heap priority queue** → optimal for sparse graphs.
+
+---
+
+## 📂 Project Structure
 
 ```
 src/
-  dijkstra/
-    classical/
-      Main.java
-      Graph.java
-      Dijkstra.java
+ └── dijkstra/
+       └── classical/
+            ├── Graph.java
+            ├── Dijkstra.java
+            └── Main.java
 ```
 
-## 4. How to Clone
+---
 
-```bash
+## ▶️ Running the Program (IntelliJ IDEA)
+
+### 1. Clone the repository
+```
 git clone https://github.com/rikkirch/Dijkstra-s_Algorithm.git
-cd Dijkstra-s_Algorithm
 ```
 
-## 5. Run in IntelliJ
+### 2. Open in IntelliJ
+- File → Open → Select project folder → OK
 
-Open project → Run `Main.java`.
+### 3. Run
+Open:  
+`src/dijkstra/classical/Main.java`  
+Click **Run ▶**
 
-Expected output:
+---
 
+## 📌 Sample Output
 ```
 Shortest distances from node 0:
 [0, 7, 3, 9, 5]
 ```
 
-## 6. Modify Graph
+---
 
-Edit edge list in `Main.java`.
+## 📚 References
 
-## 7. Assumptions
+- E. Dijkstra, *“A Note on Two Problems in Connexion with Graphs,”* Numerische Mathematik, 1959.  
+- CLRS Textbook – *Introduction to Algorithms*, 3rd Edition.  
+- https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm  
 
-- No negative weights  
-- Directed graph  
+---
+
+## ✔️ Status
+Completed classical implementation.  
+Used as baseline for comparison with improved version.
